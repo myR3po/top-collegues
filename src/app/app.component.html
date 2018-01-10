@@ -3,7 +3,7 @@
       <div class="jumbotron-content">
         <h1>Top Collègues</h1>
         <p class="jumbotron-lg-only">Les meilleures collègues du moment</p>
-        <form name="user-info">
+        <form class="form-horizontal" name="user-info">
           <div class="form-group">
             <label for="pseudo">Pseudo</label>
             <input type="pseudo" name="pseudo" class="form-control" placeholder="pseudo" #pseudo>
@@ -17,7 +17,7 @@
       </div>
     </div>
 	
-	<ngb-alert *ngIf="opened" type="success" [dismissible]="true" (close)="successMessage = null; opened= false">{{ successMessage }}</ngb-alert>
+	<ngb-alert *ngIf="opened" [type]="typeMessage" [dismissible]="canDismiss" (close)="successMessage = null; opened= false">{{ successMessage }}</ngb-alert>
 	
 	<div class="row">
 		<div class="col-4" *ngFor="let col of collegues">

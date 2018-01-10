@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Collegue } from './../shared/domain/collegue';
 import { Avis } from './../shared/domain/avis';
 
+import { CollegueService } from './../shared/service/collegue.service';
+
 @Component({
   selector: 'app-un-collegue',
   templateUrl: './un-collegue.component.html',
@@ -11,7 +13,7 @@ export class UnCollegueComponent implements OnInit {
 
 	@Input() collegue:Collegue;
 
-	constructor() { }
+	constructor(private collegueService:CollegueService){}
 
 	ngOnInit() {
 	}
@@ -19,9 +21,13 @@ export class UnCollegueComponent implements OnInit {
 	setOpinion(event) {
 
 		if(event === Avis.LIKE){
-			this.collegue.score += 10
+			this.collegueService.aimerUnCollegue(this.collegue).then(data => {
+				this.collegue = data
+			}).catch(erreur => {})
 		}else{
-			this.collegue.score -= 5
+			this.collegueService.detesterUnCollegue(this.collegue).then(data => {
+				this.collegue = data
+			}).catch(erreur => {})
 		}
 		
 	}

@@ -1,14 +1,14 @@
 export class Collegue {
 		
-	constructor(private _nom:string, private _url:string, private _score:number=10){
+	constructor(private _pseudo:string, private _url:string, private _score:number=10){
 	}
 	
-	get nom():string {
-		return this._nom;
+	get pseudo():string {
+		return this._pseudo;
 	}
 	
-	set nom(nom:string){
-		this._nom = nom;
+	set pseudo(pseudo:string){
+		this._pseudo = pseudo;
 	}
 	
 	get url():string {
@@ -26,4 +26,9 @@ export class Collegue {
 	set score(score:number) {
 		this._score = score;
 	}
+	
+	toString():string{
+		return `{"pseudo": "${this.pseudo}", "url": "${this.url}", "score":"${this.score}"}`
+	}
+	
 }
