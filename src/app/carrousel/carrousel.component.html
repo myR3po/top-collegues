@@ -1,0 +1,14 @@
+<ngb-carousel>
+  <ng-template ngbSlide *ngFor="let collegue of collegues">
+    <div class="text-center">
+		<a class="nav-link" routerLink="/detail/{{collegue.pseudo}}" routerLinkActive="active-link">
+			<img class="img-fluid img-responsive" src="{{collegue.url}}" alt="{{collegue.pseudo}}">
+		</a>
+	</div>
+	<div class="carousel-caption">
+      <h1 class="display-3">{{collegue.score}}</h1>
+      <p><app-opinion (opinion)="setOpinion($event, collegue)"></app-opinion></p>
+    </div>
+  </ng-template>
+</ngb-carousel>
+

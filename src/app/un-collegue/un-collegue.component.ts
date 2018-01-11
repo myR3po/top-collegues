@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+
 import { Collegue } from './../shared/domain/collegue';
-import { Avis } from './../shared/domain/avis';
+import { Avis } from './../shared/domain/avis'
 
 import { CollegueService } from './../shared/service/collegue.service';
 

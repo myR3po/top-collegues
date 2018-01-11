@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Component } from '@angular/core'
+import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks'
 
-import { Collegue } from './shared/domain/collegue';
-import { CollegueService } from './shared/service/collegue.service';
+import { Collegue } from './shared/domain/collegue'
+import { CollegueService } from './shared/service/collegue.service'
 
 @Component({
 	selector: 'app-root',
@@ -10,7 +10,8 @@ import { CollegueService } from './shared/service/collegue.service';
 	styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-	private collegues:Collegue[] = [];
+
+	private collegues:Collegue[] = []
 
 	private message: string
 	private opened:boolean
@@ -21,22 +22,7 @@ export class AppComponent implements OnInit {
 	
 	ngOnInit() {
 
-		this.collegueService.listerCollegues().then(data => {
-			this.collegues = data
-		})
-		.catch(erreur => {
-			this.collegues.push(new Collegue('Guy', 'https://avatars0.githubusercontent.com/u/18171845?s=400&v=4', 50))
-			this.collegues.push(new Collegue('Alfred', 'https://avatars0.githubusercontent.com/u/18171845?s=400&v=4', 60))
-			this.collegues.push(new Collegue('Roseline', 'https://avatars0.githubusercontent.com/u/18171845?s=400&v=4', 80))
-			this.collegues.push(new Collegue('jean', 'https://avatars0.githubusercontent.com/u/18171845?s=400&v=4', 65))
-			this.collegues.push(new Collegue('pierre', 'https://avatars0.githubusercontent.com/u/18171845?s=400&v=4', 77))
-
-			this.successMessage = `Erreur interne, Le serveur est injoignable`
-			this.typeMessage = "warning"
-			this.canDismiss = false
-			this.opened = true
-			console.log(erreur)
-		})
+		
 	}
 	
 	
@@ -45,7 +31,7 @@ export class AppComponent implements OnInit {
 		
 		this.collegueService.sauvegarder(c).then(data => {
 			this.collegues = data
-			this.successMessage = `Le collègue ${pseudo.value} a été ajouté avec succès.`
+			this.message = `Le collègue ${pseudo.value} a été ajouté avec succès.`
 			this.typeMessage = "success"
 			this.opened = true
 			
@@ -54,7 +40,7 @@ export class AppComponent implements OnInit {
 			pseudo.value = ''
 			imageUrl.value = ''
 		}).catch(erreur => {
-			this.successMessage = `Le collègue ${pseudo.value} existe déjà.`
+			this.message = `Le collègue ${pseudo.value} existe déjà.`
 			this.typeMessage = "danger"
 			this.opened = true
 		

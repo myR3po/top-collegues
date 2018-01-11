@@ -1,0 +1,13 @@
+
+<div class="text-center">
+		<img class="img-fluid img-responsive" src="{{collegue.url}}" alt="{{collegue.pseudo}}">
+	</div>
+<div class="row">
+	<div class="col">
+		<div class="text-center">
+		  <h1 class="display-1">{{collegue.pseudo | uppercase}}</h1>
+		<h1 class="display-3">{{collegue.score}}</h1>
+		  <p><app-opinion (opinion)="setOpinion($event)"></app-opinion></p>
+		</div>
+	</div>
+</div>

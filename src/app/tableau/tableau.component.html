@@ -1,0 +1,22 @@
+<table class="table table-responsive-xl">
+	<thead class="thead-light">
+		<tr>
+			<th></th>
+			<th>Pseudo</th>
+			<th>Score</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+	  <tr *ngFor="let collegue of collegues">
+		<td>
+			<a class="nav-link" routerLink="/detail/{{collegue.pseudo}}" routerLinkActive="active-link">
+				<img width="30" height="30" class="img-fluid img-responsive" src="{{collegue.url}}" alt="{{collegue.pseudo}}">
+			</a>
+		</td>
+		<td>{{collegue.pseudo | uppercase}}</td>
+		<td>{{collegue.score}}</td>
+		<td><app-opinion (opinion)="setOpinion($event, collegue)"></app-opinion></td>
+	  </tr>
+	</tbody>
+</table>
