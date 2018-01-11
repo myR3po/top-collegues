@@ -1,5 +1,15 @@
+<div class="input-group mb-2">
+	<div class="input-group-addon">Limite</div>
+	<input type="number" class="form-control" id="limite" #limite (keyup)="changeLimite(limite.value)" (change)="changeLimite(limite.value)">
+</div>
+
+<div class="input-group mt-2">
+	<div class="input-group-addon">Filtre par pseudo</div>
+	<input type="text" class="form-control" id="pseudo" #pseudo (keyup)="pseudoToFilter = pseudo.value">
+</div>
+
 <div class="row">
-	<div class="col-4" *ngFor="let col of collegues">
+	<div class="col-4" *ngFor="let col of collegues | filtreByPseudo:pseudoToFilter | slice:0:limit">
 		<app-un-collegue [collegue]="col"></app-un-collegue>
 	</div>
 </div>

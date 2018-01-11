@@ -1,12 +1,22 @@
+<div class="input-group mb-2">
+	<div class="input-group-addon">Limite</div>
+	<input type="number" class="form-control" id="limite" #limite (keyup)="changeLimite(limite.value)" (change)="changeLimite(limite.value)">
+</div>
+
+<div class="input-group mt-2">
+	<div class="input-group-addon">Filtre par pseudo</div>
+	<input type="text" class="form-control" id="pseudo" #pseudo (keyup)="pseudoToFilter = pseudo.value">
+</div>
+
 <ngb-carousel>
-  <ng-template ngbSlide *ngFor="let collegue of collegues">
+  <ng-template ngbSlide *ngFor="let collegue of collegues | filtreByPseudo:pseudoToFilter | slice:0:limit">
     <div class="text-center">
 		<a class="nav-link" routerLink="/detail/{{collegue.pseudo}}" routerLinkActive="active-link">
 			<img class="img-fluid img-responsive" src="{{collegue.url}}" alt="{{collegue.pseudo}}">
 		</a>
 	</div>
 	<div class="carousel-caption">
-      <h1 class="display-3">{{collegue.score}}</h1>
+      <h1 class="display-3">{{collegue.score | score}}</h1>
       <p><app-opinion (opinion)="setOpinion($event, collegue)"></app-opinion></p>
     </div>
   </ng-template>

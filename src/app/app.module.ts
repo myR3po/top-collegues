@@ -15,10 +15,12 @@ import { ClassiqueComponent } from './classique/classique.component';
 import { TableauComponent } from './tableau/tableau.component';
 import { CarrouselComponent } from './carrousel/carrousel.component';
 import { PageDetailComponent } from './page-detail/page-detail.component';
+import { ScorePipe } from './shared/pipe/score.pipe';
+import { FiltreByPseudoPipe } from './shared/pipe/filtre-by-pseudo.pipe';
 
 
 const appRoutes: Routes = [
-{ path: 'classique', component: ClassiqueComponent, data: { collegue: 'col' }}, // /page1 affiche le composant A
+{ path: 'classique', component: ClassiqueComponent},
 { path: 'tableau', component: TableauComponent },
 { path: 'carrousel', component: CarrouselComponent },
 { path: 'detail/:pseudo', component: PageDetailComponent },
@@ -33,7 +35,9 @@ const appRoutes: Routes = [
     ClassiqueComponent,
     TableauComponent,
     CarrouselComponent,
-    PageDetailComponent
+    PageDetailComponent,
+    ScorePipe,
+    FiltreByPseudoPipe
   ],
   imports: [
 	BrowserModule,

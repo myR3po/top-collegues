@@ -12,7 +12,8 @@ import { CollegueService } from '../shared/service/collegue.service'
 export class TableauComponent implements OnInit {
 
 	private collegues:Collegue[] = []
-
+	private limit:number
+	private pseudoToFilter:string
 
 	private message: string
 	private opened:boolean
@@ -52,6 +53,12 @@ export class TableauComponent implements OnInit {
 			}).catch(erreur => {})
 		}
 		
+	}
+
+	changeLimite(newLimite){
+		if (newLimite >= 1){
+			this.limit = newLimite
+		}
 	}
 
 }

@@ -13,6 +13,9 @@ export class CarrouselComponent implements OnInit {
 
 	private collegues:Collegue[] = []
 
+	private limit:number
+	private pseudoToFilter:string
+
 	private message: string
 	private opened:boolean
 	private canDismiss:boolean = true
@@ -49,8 +52,13 @@ export class CarrouselComponent implements OnInit {
 			this.collegueService.detesterUnCollegue(collegue).then(data => {
 				this.collegues.filter(c => c.pseudo === data.pseudo)[0].score = data.score
 			}).catch(erreur => {})
+		}	
+	}
+
+	 changeLimite(newLimite){
+		if (newLimite >= 1){
+			this.limit = newLimite
 		}
-		
 	}
 
 }

@@ -1,3 +1,13 @@
+<div class="input-group mb-2">
+	<div class="input-group-addon">Limite</div>
+	<input type="number" class="form-control" id="limite" #limite (keyup)="changeLimite(limite.value)" (change)="changeLimite(limite.value)">
+</div>
+
+<div class="input-group mt-2">
+	<div class="input-group-addon">Filtre par pseudo</div>
+	<input type="text" class="form-control" id="pseudo" #pseudo (keyup)="pseudoToFilter = pseudo.value">
+</div>
+
 <table class="table table-responsive-xl">
 	<thead class="thead-light">
 		<tr>
@@ -8,14 +18,14 @@
 		</tr>
 	</thead>
 	<tbody>
-	  <tr *ngFor="let collegue of collegues">
+	  <tr *ngFor="let collegue of collegues | filtreByPseudo:pseudoToFilter | slice:0:limit">
 		<td>
 			<a class="nav-link" routerLink="/detail/{{collegue.pseudo}}" routerLinkActive="active-link">
 				<img width="30" height="30" class="img-fluid img-responsive" src="{{collegue.url}}" alt="{{collegue.pseudo}}">
 			</a>
 		</td>
 		<td>{{collegue.pseudo | uppercase}}</td>
-		<td>{{collegue.score}}</td>
+		<td>{{collegue.score | score}}</td>
 		<td><app-opinion (opinion)="setOpinion($event, collegue)"></app-opinion></td>
 	  </tr>
 	</tbody>

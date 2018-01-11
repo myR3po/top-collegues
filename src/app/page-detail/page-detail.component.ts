@@ -15,7 +15,7 @@ export class PageDetailComponent implements OnInit {
 	private collegue:Collegue
 
 	constructor(private route: ActivatedRoute, private collegueService:CollegueService) {
-		route.params.subscribe(params => { this.pseudo = params['pseudo'] })
+		this.route.params.subscribe(params => { this.pseudo = params['pseudo'] })
 	}
 
 	ngOnInit() {

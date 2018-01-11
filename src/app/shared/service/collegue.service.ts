@@ -16,7 +16,6 @@ export class CollegueService {
 		return new Promise<Collegue[]>((resolve, reject) => {
 
 			if(this.collegues){
-
 				resolve(this.collegues)
 			}else{
 				this.http.get<Collegue[]>(env.backendUrl).toPromise().then(data => {
