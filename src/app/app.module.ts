@@ -11,12 +11,15 @@ import { UnCollegueComponent } from './un-collegue/un-collegue.component';
 import { OpinionComponent } from './opinion/opinion.component';
 
 import { CollegueService } from './shared/service/collegue.service';
+import { AvisService } from './shared/service/avis.service';
+
 import { ClassiqueComponent } from './classique/classique.component';
 import { TableauComponent } from './tableau/tableau.component';
 import { CarrouselComponent } from './carrousel/carrousel.component';
 import { PageDetailComponent } from './page-detail/page-detail.component';
 import { ScorePipe } from './shared/pipe/score.pipe';
 import { FiltreByPseudoPipe } from './shared/pipe/filtre-by-pseudo.pipe';
+import { VotreDernierAvisComponent } from './votre-dernier-avis/votre-dernier-avis.component';
 
 
 const appRoutes: Routes = [
@@ -37,7 +40,8 @@ const appRoutes: Routes = [
     CarrouselComponent,
     PageDetailComponent,
     ScorePipe,
-    FiltreByPseudoPipe
+    FiltreByPseudoPipe,
+    VotreDernierAvisComponent
   ],
   imports: [
 	BrowserModule,
@@ -45,7 +49,7 @@ const appRoutes: Routes = [
 	NgbModule.forRoot(),
 	RouterModule.forRoot(appRoutes)
   ],
-  providers: [CollegueService],
+  providers: [CollegueService, AvisService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

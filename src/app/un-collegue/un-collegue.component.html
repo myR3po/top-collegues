@@ -5,7 +5,7 @@
 	<div class="card-body text-center">
 		<h4 class="card-title"><strong>{{collegue.pseudo | uppercase}}</strong></h4>
 
-		<p class="card-text"><span class="display-3"> {{collegue.score | score}} </span></p>
+		<p class="card-text"><span class="display-3" [innerHTML]="collegue.score | score"> </span></p>
 	   
 		<app-opinion (opinion)="setOpinion($event)"></app-opinion>
 	</div>

@@ -7,10 +7,10 @@ export class ScorePipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
 		if(value > 0 ){
-			return '+ '+ value 
+			return `<span class="text-success">+ ${value}</span>`
 		}else if(value < 0 ){
 			let temp = '' + value
-			return '- '+ temp.substring(1)
+			return `<span class="text-danger">- ${temp.substring(1)}</span>`
 		}else{
 			return value
 		}

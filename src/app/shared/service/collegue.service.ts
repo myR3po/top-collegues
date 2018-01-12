@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core'
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 
-import {Observable, BehaviorSubject} from 'rxjs/Rx';
+import {Observable, BehaviorSubject} from 'rxjs/Rx'
 
+import { Avis } from '../domain/avis'
 import { Collegue } from '../domain/collegue'
+import { Vote } from '../domain/vote'
+
+import { AvisService } from './avis.service'
 
 import { environment as env } from '../../../environments/environment'
 
@@ -12,7 +16,7 @@ export class CollegueService {
 	
 	private collegues:BehaviorSubject<Collegue[]> = new BehaviorSubject([])
 	
-	constructor(private http:HttpClient){
+	constructor(private http:HttpClient, private avisService:AvisService){
 		this.refreshData()
 	}
 
@@ -36,8 +40,9 @@ export class CollegueService {
 	}
 
 	aimerUnCollegue(unCollegue:Collegue) : Observable<Collegue> {
+		
+		this.avisService.updateAvisMessage(new Vote(unCollegue, Avis.LIKE))
 		let body:string = '{"action":"aimer"}'
-
 		return this.http.patch<Collegue>(env.backendUrl+ '/' + unCollegue.pseudo,
 							body,
 							{headers: new HttpHeaders().set('Content-Type', 'application/json')})
@@ -45,8 +50,8 @@ export class CollegueService {
 
 	detesterUnCollegue(unCollegue:Collegue) : Observable<Collegue> {
 
+		this.avisService.updateAvisMessage(new Vote(unCollegue, Avis.DISLIKE))
 		let body:string =  '{"action":"detester"}'
-
 		return this.http.patch<Collegue>(env.backendUrl+ '/' + unCollegue.pseudo,
 				body,
 				{headers: new HttpHeaders().set('Content-Type', 'application/json')})

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 
 import { Avis } from './../shared/domain/avis'
 import { Collegue } from '../shared/domain/collegue'
+
 import { CollegueService } from '../shared/service/collegue.service'
 
 @Component({

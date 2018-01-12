@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Avis } from './../shared/domain/avis'
 import { Collegue } from '../shared/domain/collegue'
+
 import { CollegueService } from '../shared/service/collegue.service'
 
 @Component({
@@ -15,6 +16,8 @@ export class CarrouselComponent implements OnInit {
 
 	private limit:number
 	private pseudoToFilter:string
+
+private messageAvis: string
 
 	private message: string
 	private opened:boolean
@@ -58,8 +61,8 @@ export class CarrouselComponent implements OnInit {
 				})
 		}	
 	}
-
-	 changeLimite(newLimite){
+	
+	changeLimite(newLimite){
 		if (newLimite >= 1){
 			this.limit = newLimite
 		}

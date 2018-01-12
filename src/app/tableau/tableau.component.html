@@ -25,7 +25,7 @@
 			</a>
 		</td>
 		<td>{{collegue.pseudo | uppercase}}</td>
-		<td>{{collegue.score | score}}</td>
+		<td [innerHTML]="collegue.score | score"></td>
 		<td><app-opinion (opinion)="setOpinion($event, collegue)"></app-opinion></td>
 	  </tr>
 	</tbody>
