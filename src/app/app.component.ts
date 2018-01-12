@@ -11,8 +11,6 @@ import { CollegueService } from './shared/service/collegue.service'
 })
 export class AppComponent implements OnInit {
 
-	private collegues:Collegue[] = []
-
 	private message: string
 	private opened:boolean
 	private canDismiss:boolean = true
@@ -29,32 +27,17 @@ export class AppComponent implements OnInit {
 	add(pseudo:HTMLInputElement, imageUrl: HTMLInputElement) {
 		let c:Collegue =  new Collegue(pseudo.value, imageUrl.value);
 		
-		this.collegueService.sauvegarder(c).subscribe(data => {
-			this.collegues = data
-			this.message = `Le collègue ${pseudo.value} a été ajouté avec succès.`
-			this.typeMessage = "success"
-			this.opened = true
-			
-			setTimeout(() => this.opened = false, 20000)
-			
-			pseudo.value = ''
-			imageUrl.value = ''
-		},
-		erreur => {
-			this.message = `Le collègue ${pseudo.value} existe déjà.`
-			this.typeMessage = "danger"
-			this.opened = true
+		this.collegueService.sauvegarder(c)
+		this.message = `Le collègue ${pseudo.value} a été ajouté avec succès.`
+		this.typeMessage = "success"
+		this.opened = true
 		
-			setTimeout(() => this.opened = false, 20000)
-			
-			pseudo.value = ''
-			imageUrl.value = ''
-
-		})
+		setTimeout(() => this.opened = false, 20000)
 		
+		pseudo.value = ''
+		imageUrl.value = ''
 		
-		
-		return false; // pour éviter le rechargement de la page
+		return false;
 	}
 
 }
