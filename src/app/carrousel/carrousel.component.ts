@@ -24,10 +24,10 @@ export class CarrouselComponent implements OnInit {
   constructor(private collegueService:CollegueService){}
 
   ngOnInit() {
-		this.collegueService.listerCollegues().then(data => {
+		this.collegueService.listerCollegues().subscribe(data => {
 			this.collegues = data
-		})
-		.catch(erreur => {
+		},
+		erreur => {
 			this.collegues.push(new Collegue('Guy', 'https://avatars0.githubusercontent.com/u/18171845?s=400&v=4', 50))
 			this.collegues.push(new Collegue('Alfred', 'https://avatars0.githubusercontent.com/u/18171845?s=400&v=4', 60))
 			this.collegues.push(new Collegue('Roseline', 'https://avatars0.githubusercontent.com/u/18171845?s=400&v=4', 80))
@@ -45,13 +45,17 @@ export class CarrouselComponent implements OnInit {
 	setOpinion(event, collegue:Collegue) {
 
 		if(event === Avis.LIKE){
-			this.collegueService.aimerUnCollegue(collegue).then(data => {
-				this.collegues.filter(c => c.pseudo === data.pseudo)[0].score = data.score
-			}).catch(erreur => {})
+			this.collegueService.aimerUnCollegue(collegue)
+				.subscribe(collegueFromService => {
+					console.log(collegueFromService)
+					this.collegues.filter(collegueFromArray => collegueFromArray.pseudo === collegueFromService.pseudo)[0].score = collegueFromService.score
+				})
 		}else{
-			this.collegueService.detesterUnCollegue(collegue).then(data => {
-				this.collegues.filter(c => c.pseudo === data.pseudo)[0].score = data.score
-			}).catch(erreur => {})
+			this.collegueService.detesterUnCollegue(collegue)
+				.subscribe(collegueFromService => {
+					console.log(collegueFromService)
+					this.collegues.filter(collegueFromArray => collegueFromArray.pseudo === collegueFromService.pseudo)[0].score = collegueFromService.score
+				})
 		}	
 	}
 

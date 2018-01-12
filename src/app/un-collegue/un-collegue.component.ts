@@ -19,18 +19,19 @@ export class UnCollegueComponent implements OnInit {
 	ngOnInit() {
 	}
   
-	setOpinion(event) {
+	setOpinion(event, collegue:Collegue) {
 
 		if(event === Avis.LIKE){
-			this.collegueService.aimerUnCollegue(this.collegue).then(data => {
-				this.collegue = data
-			}).catch(erreur => {})
+			this.collegueService.aimerUnCollegue(this.collegue)
+				.subscribe(collegueFromService => {
+					this.collegue.score = collegueFromService.score
+				})
 		}else{
-			this.collegueService.detesterUnCollegue(this.collegue).then(data => {
-				this.collegue = data
-			}).catch(erreur => {})
-		}
-		
+			this.collegueService.detesterUnCollegue(this.collegue)
+				.subscribe(collegueFromService => {
+					this.collegue.score = collegueFromService.score
+				})
+		}	
 	}
   
   

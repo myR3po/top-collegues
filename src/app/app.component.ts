@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
 	add(pseudo:HTMLInputElement, imageUrl: HTMLInputElement) {
 		let c:Collegue =  new Collegue(pseudo.value, imageUrl.value);
 		
-		this.collegueService.sauvegarder(c).then(data => {
+		this.collegueService.sauvegarder(c).subscribe(data => {
 			this.collegues = data
 			this.message = `Le collègue ${pseudo.value} a été ajouté avec succès.`
 			this.typeMessage = "success"
@@ -39,7 +39,8 @@ export class AppComponent implements OnInit {
 			
 			pseudo.value = ''
 			imageUrl.value = ''
-		}).catch(erreur => {
+		},
+		erreur => {
 			this.message = `Le collègue ${pseudo.value} existe déjà.`
 			this.typeMessage = "danger"
 			this.opened = true

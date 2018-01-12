@@ -19,24 +19,25 @@ export class PageDetailComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.collegueService.listerCollegues().then(data => {
+		this.collegueService.listerCollegues().subscribe(data => {
 			this.collegue = data.filter(c => c.pseudo == this.pseudo)[0]
 		})
 		
 	}
-	
-	setOpinion(event) {
+
+	setOpinion(event, collegue:Collegue) {
 
 		if(event === Avis.LIKE){
-			this.collegueService.aimerUnCollegue(this.collegue).then(data => {
-				this.collegue.score = data.score
-			}).catch(erreur => {})
+			this.collegueService.aimerUnCollegue(this.collegue)
+				.subscribe(collegueFromService => {
+					this.collegue.score = collegueFromService.score
+				})
 		}else{
-			this.collegueService.detesterUnCollegue(this.collegue).then(data => {
-				this.collegue.score = data.score
-			}).catch(erreur => {})
-		}
-		
+			this.collegueService.detesterUnCollegue(this.collegue)
+				.subscribe(collegueFromService => {
+					this.collegue.score = collegueFromService.score
+				})
+		}	
 	}
 
 }

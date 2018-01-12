@@ -18,11 +18,11 @@ export class ClassiqueComponent implements OnInit {
   constructor(private collegueService:CollegueService){}
 
   ngOnInit() {
-		this.collegueService.listerCollegues().then(data => {
+		this.collegueService.listerCollegues().subscribe(data => {
 			this.collegues = data
 			this.limit = this.collegues.length
-		})
-		.catch(erreur => {
+		},
+		erreur => {
 			this.collegues.push(new Collegue('Guy', 'https://avatars0.githubusercontent.com/u/18171845?s=400&v=4', 50))
 			this.collegues.push(new Collegue('Alfred', 'https://avatars0.githubusercontent.com/u/18171845?s=400&v=4', 60))
 			this.collegues.push(new Collegue('Roseline', 'https://avatars0.githubusercontent.com/u/18171845?s=400&v=4', 80))
