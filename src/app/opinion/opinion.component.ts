@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { Avis } from './../shared/domain/avis';
-
+import { CollegueService } from '../shared/service/collegue.service'
 @Component({
   selector: 'app-opinion',
   templateUrl: './opinion.component.html',
@@ -10,10 +10,14 @@ import { Avis } from './../shared/domain/avis';
 export class OpinionComponent implements OnInit {
 
 	@Output() opinion:EventEmitter<Avis> = new EventEmitter<Avis>()
-
-	constructor() { }
+	private canDisableButton:boolean = false
+	
+	constructor(private collegueService:CollegueService) { }
 
 	ngOnInit() {
+		this.collegueService.getStatus().subscribe(online => {
+			this.canDisableButton = !online
+		})
 	}
   
 	jaime() {

@@ -16,10 +16,15 @@ export class AppComponent implements OnInit {
 	private canDismiss:boolean = true
 	private typeMessage:string
 	
+	private canDisableButton:boolean = false
+	
 	constructor(private collegueService:CollegueService){}
 	
 	ngOnInit() {
-
+		this.collegueService.getStatus().subscribe(online => {
+			this.canDisableButton = !online
+				
+		})
 		
 	}
 	

@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
-  backendUrl: 'http://localhost:8080/collegues'
+  backendUrlCollegues: 'http://localhost:8080/collegues',
+  backendUrlCheck: 'http://localhost:8080/check'
 
 };

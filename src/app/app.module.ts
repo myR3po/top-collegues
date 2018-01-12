@@ -20,6 +20,7 @@ import { PageDetailComponent } from './page-detail/page-detail.component';
 import { ScorePipe } from './shared/pipe/score.pipe';
 import { FiltreByPseudoPipe } from './shared/pipe/filtre-by-pseudo.pipe';
 import { VotreDernierAvisComponent } from './votre-dernier-avis/votre-dernier-avis.component';
+import { SiteStatusComponent } from './site-status/site-status.component';
 
 
 const appRoutes: Routes = [
@@ -41,7 +42,8 @@ const appRoutes: Routes = [
     PageDetailComponent,
     ScorePipe,
     FiltreByPseudoPipe,
-    VotreDernierAvisComponent
+    VotreDernierAvisComponent,
+    SiteStatusComponent
   ],
   imports: [
 	BrowserModule,

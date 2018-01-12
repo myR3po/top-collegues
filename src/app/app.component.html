@@ -1,7 +1,7 @@
  <div class="container"> 
     <div class="jumbotron">
       <div class="jumbotron-content">
-        <h1>Top Collègues</h1>
+        <h1>Top Collègues </h1><app-site-status></app-site-status>
         <p class="jumbotron-lg-only">Les meilleures collègues du moment</p>
         <form class="form-horizontal" name="user-info">
           <div class="form-group">
@@ -12,7 +12,7 @@
             <label for="imageUrl">Url image:</label>
             <input type="imageUrl" name="imageUrl" class="form-control" placeholder="" #imageUrl>
           </div>
-		  <button class="btn btn-primary btn-large" (click)="add(pseudo, imageUrl)">Ajouter un nouveau collègue</button>
+		  <button class="btn btn-primary btn-large" [disabled]=canDisableButton (click)="add(pseudo, imageUrl)">Ajouter un nouveau collègue</button>
         </form>
       </div>
     </div>
