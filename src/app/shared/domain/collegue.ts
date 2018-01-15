@@ -1,6 +1,14 @@
 export class Collegue {
 		
-	constructor(private _pseudo:string, private _url:string, private _score:number=10){
+	constructor(private _id:number=0, private _pseudo:string, private _url:string, private _score:number=0){
+	}
+	
+	get id():number {
+		return this._id;
+	}
+	
+	set id(id:number){
+		this._id = id;
 	}
 	
 	get pseudo():string {

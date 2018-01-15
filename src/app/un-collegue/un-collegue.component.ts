@@ -3,7 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Collegue } from './../shared/domain/collegue';
 import { Avis } from './../shared/domain/avis'
 
-import { CollegueService } from './../shared/service/collegue.service';
+import { VoteService } from './../shared/service/vote.service';
 
 @Component({
   selector: 'app-un-collegue',
@@ -14,7 +14,7 @@ export class UnCollegueComponent implements OnInit {
 
 	@Input() collegue:Collegue;
 
-	constructor(private collegueService:CollegueService){}
+	constructor(private voteService:VoteService){}
 
 	ngOnInit() {
 	}
@@ -22,12 +22,12 @@ export class UnCollegueComponent implements OnInit {
 	setOpinion(event, collegue:Collegue) {
 
 		if(event === Avis.LIKE){
-			this.collegueService.aimerUnCollegue(this.collegue)
+			this.voteService.aimerUnCollegue(this.collegue)
 				.subscribe(collegueFromService => {
 					this.collegue.score = collegueFromService.score
 				})
 		}else{
-			this.collegueService.detesterUnCollegue(this.collegue)
+			this.voteService.detesterUnCollegue(this.collegue)
 				.subscribe(collegueFromService => {
 					this.collegue.score = collegueFromService.score
 				})

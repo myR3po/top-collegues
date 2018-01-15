@@ -41,24 +41,6 @@ export class CollegueService {
 					this.collegues.next(data)
 			})
 	}
-
-	aimerUnCollegue(unCollegue:Collegue) : Observable<Collegue> {
-		
-		this.avisService.updateAvisMessage(new Vote(unCollegue, Avis.LIKE))
-		let body:string = '{"action":"aimer"}'
-		return this.http.patch<Collegue>(env.backendUrlCollegues+ '/' + unCollegue.pseudo,
-							body,
-							{headers: new HttpHeaders().set('Content-Type', 'application/json')})
-	}
-
-	detesterUnCollegue(unCollegue:Collegue) : Observable<Collegue> {
-
-		this.avisService.updateAvisMessage(new Vote(unCollegue, Avis.DISLIKE))
-		let body:string =  '{"action":"detester"}'
-		return this.http.patch<Collegue>(env.backendUrlCollegues+ '/' + unCollegue.pseudo,
-				body,
-				{headers: new HttpHeaders().set('Content-Type', 'application/json')})
-	}
 	
 	// -----
 	
@@ -68,13 +50,22 @@ export class CollegueService {
 	}
 	
 	checkConnection(){
+		
 		if(window.navigator.onLine){
+			
 			Observable.interval(2000)
 			.subscribe(() => this.http.get<Collegue[]>(env.backendUrlCheck)
-						.subscribe(data => {
+						.subscribe(data => {						
 							this.status.next(true)
 						}, 
-						error => this.status.next(false))
+						error => {
+								if(error.status === 200){
+									this.status.next(true)
+								}else{
+									this.status.next(false) 	
+								}						
+								
+							})
 					)
 		}else{
 			this.status.next(false)

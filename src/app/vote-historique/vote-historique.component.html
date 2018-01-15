@@ -1,0 +1,29 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Historique</h3>
+  </div>
+  <div class="panel-body">
+    <ul class="list-group">
+		<li class="list-group-item" *ngFor="let vote of votes; let i =index">
+			<div class="row">
+				<div class="col-4">
+					<img width="100" height="100" class="img-fluid img-responsive" src="{{vote.collegue.url}}" alt="{{vote.collegue.pseudo}}">
+				</div>
+				<div class="col-8">
+					<h4 class="list-group-item-heading">{{vote.collegue.pseudo}}</h4>
+					<div *ngIf="(vote.avis == 'aimer') then templateAimer else templateDetester"></div>
+					<p class="list-group-item-text">
+						<ng-template #templateAimer>
+							{{vote.collegue.pseudo}} est aimé(e), et a desormais un score de {{vote.collegue.score}}
+						</ng-template>
+
+						<ng-template #templateDetester>
+							{{vote.collegue.pseudo}} est destesté(e) , et a desormais un score de {{vote.collegue.score}}
+						</ng-template>
+					</p>
+				</div>
+			</div>
+		</li>
+	</ul>
+  </div>
+</div>

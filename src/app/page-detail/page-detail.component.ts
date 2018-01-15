@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router'
 import { Avis } from './../shared/domain/avis'
 import { Collegue } from '../shared/domain/collegue'
 import { CollegueService } from '../shared/service/collegue.service'
+import { VoteService } from './../shared/service/vote.service';
 
 @Component({
   selector: 'app-page-detail',
@@ -14,7 +15,7 @@ export class PageDetailComponent implements OnInit {
 	private pseudo:string
 	private collegue:Collegue
 
-	constructor(private route: ActivatedRoute, private collegueService:CollegueService) {
+	constructor(private route: ActivatedRoute, private collegueService:CollegueService, private voteService:VoteService) {
 		this.route.params.subscribe(params => { this.pseudo = params['pseudo'] })
 	}
 
@@ -28,12 +29,12 @@ export class PageDetailComponent implements OnInit {
 	setOpinion(event, collegue:Collegue) {
 
 		if(event === Avis.LIKE){
-			this.collegueService.aimerUnCollegue(this.collegue)
+			this.voteService.aimerUnCollegue(this.collegue)
 				.subscribe(collegueFromService => {
 					this.collegue.score = collegueFromService.score
 				})
 		}else{
-			this.collegueService.detesterUnCollegue(this.collegue)
+			this.voteService.detesterUnCollegue(this.collegue)
 				.subscribe(collegueFromService => {
 					this.collegue.score = collegueFromService.score
 				})
