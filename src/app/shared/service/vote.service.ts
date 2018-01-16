@@ -15,7 +15,8 @@ import { environment as env } from '../../../environments/environment'
 export class VoteService {
 
 	private votes:BehaviorSubject<Vote[]> = new BehaviorSubject([])
-
+	private currentVoteId:number = 0
+	
 	constructor(private http:HttpClient, private avisService:AvisService){
 		this.refreshData()
 		this.lastVotes()
@@ -34,7 +35,7 @@ export class VoteService {
 	
 	aimerUnCollegue(unCollegue:Collegue) : Observable<Collegue> {
 		
-		this.avisService.updateAvisMessage(new Vote(unCollegue, Avis.LIKE))
+		this.avisService.updateAvisMessage(new Vote(0, unCollegue, Avis.LIKE))
 		let body:string = '{"avis":"aimer", "collegue":'+ JSON.stringify(unCollegue) +'}'
 		return this.http.patch<Collegue>(env.backendUrlVotes,
 							body,
@@ -42,7 +43,7 @@ export class VoteService {
 	}
 
 	detesterUnCollegue(unCollegue:Collegue) : Observable<Collegue> {
-		this.avisService.updateAvisMessage(new Vote(unCollegue, Avis.DISLIKE))
+		this.avisService.updateAvisMessage(new Vote(0, unCollegue, Avis.DISLIKE))
 		let body:string =  '{"avis":"detester", "collegue":'+ JSON.stringify(unCollegue) +'}'
 		return this.http.patch<Collegue>(env.backendUrlVotes,
 				body,
@@ -51,14 +52,55 @@ export class VoteService {
 	
 	lastVotes() {
 		Observable.interval(4000)
-			.subscribe(() => this.http.get<Vote[]>(env.backendUrlVotes+ '?since=' + (this.votes.value.length === 0? 0 : this.votes.value[0].id) )
-						.subscribe(data => {			
-							this.votes.next(data)
-						}, 
-						error => {								
+			.subscribe(() => {
+	
+					if(this.votes.value.length !== 0){ 
+						this.votes.value.forEach(v => {
+							if(v.id > this.currentVoteId){
+								this.currentVoteId = v.id
 							}
-						)
+						})
+					}
+
+					this.http.get<Vote[]>(env.backendUrlVotes+ '?since=' + this.currentVoteId )
+							.subscribe(data => {			
+								this.votes.next(data)
+							}, 
+							error => {								
+								}
 					)
+					
+				}
+			)
 	}
+	
+	
+	
+	// webSocket
+	// private stompClient: = null;
+	
+	// connect() {
+		// var socket = new SockJS('/gs-guide-websocket');
+		// stompClient = Stomp.over(socket);
+		// stompClient.connect({}, frame => {
+			// setConnected(true);
+			// console.log('Connected: ' + frame);
+			// stompClient.subscribe('/topic/greetings', greeting => {
+				// showGreeting(JSON.parse(greeting.body).content);
+			// });
+		// });
+	// }
+
+	// disconnect() {
+		// if (stompClient !== null) {
+			// stompClient.disconnect();
+		// }
+		// setConnected(false);
+		// console.log("Disconnected");
+	// }
+
+	// sendName() {
+		// stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
+	// }
 	
 }

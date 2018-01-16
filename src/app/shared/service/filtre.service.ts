@@ -18,9 +18,9 @@ export class FiltreService {
 	return this.pseudoToFilter.asObservable()
   }
   
-  updateLimite(limit:string): void{
+  updateLimite(limit:number): void{
 	if(limit >= 1){
-		this.limit.next(limit)
+		this.limit.next(('' + limit))
 	}
   }
   

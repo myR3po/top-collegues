@@ -7,5 +7,6 @@ export const environment = {
   production: false,
   backendUrlCollegues: 'http://localhost:8080/collegues',
   backendUrlCheck: 'http://localhost:8080/check',
-  backendUrlVotes: 'http://localhost:8080/votes'
+  backendUrlVotes: 'http://localhost:8080/votes',
+  backendUrlComments: 'http://localhost:8080/comments'
 };

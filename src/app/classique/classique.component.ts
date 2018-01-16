@@ -19,9 +19,10 @@ export class ClassiqueComponent implements OnInit {
   constructor(private collegueService:CollegueService, private filtreService:FiltreService){}
 
   ngOnInit() {
+	  
 		this.collegueService.listerCollegues().subscribe(data => {
 			this.collegues = data
-			this.limit = '' + this.collegues.length
+			this.filtreService.updateLimite(this.collegues.length)
 		},
 		erreur => {
 			console.log(erreur)

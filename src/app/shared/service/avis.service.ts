@@ -7,7 +7,7 @@ import { Vote } from '../domain/vote'
 @Injectable()
 export class AvisService {
 
-  private avis:BehaviorSubject<Vote> = new BehaviorSubject(new Vote(null, null))
+  private avis:BehaviorSubject<Vote> = new BehaviorSubject(new Vote(0, null, null))
 
 	constructor() { }
 

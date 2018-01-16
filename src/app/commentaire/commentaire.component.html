@@ -1,0 +1,36 @@
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Votre avis</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form class="form-horizontal" (ngSubmit)="submit()" #commentForm="ngForm">
+	  <div class="modal-body">
+		
+		
+		  <div class="form-group">
+			<label for="comment">Que pensez-vous de {{collegue.pseudo}} ?</label>
+			<textarea class="form-control" rows="5" name="commentaire" id="commentaire" placeholder="votre commentaire" [(ngModel)]="opinion.commentaire" #comment="ngModel" required minlength="10" maxlength="255"></textarea>
+		  </div>
+		  <div *ngIf="comment.errors && (comment.dirty || comment.touched)"
+			 class="alert alert-danger">
+			  <div *ngIf="comment.errors.minlength">
+				Comment must be at least 10 characters long.
+			  </div>
+
+			  <div *ngIf="comment.errors.maxlength">
+				Comment exceed size limit (255) 
+			  </div>
+
+		</div>
+	  </div>
+	  <div class="modal-footer">
+		<button type="submit" class="btn btn-outline-primary btn-lg" [disabled]="!commentForm.valid">Enregistrer</button>
+	  </div>
+  </form>
+</ng-template>
+
+<button class="btn btn-outline-success" [disabled]=canDisableButton (click)="open(content)">Rediger un commentaire</button>
+
+<hr>

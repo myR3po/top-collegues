@@ -5,6 +5,7 @@ import {HttpClientModule} from '@angular/common/http';
 
 import { RouterModule, Routes } from '@angular/router';
 
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { UnCollegueComponent } from './un-collegue/un-collegue.component';
@@ -14,6 +15,8 @@ import { CollegueService } from './shared/service/collegue.service';
 import { AvisService } from './shared/service/avis.service';
 import { VoteService } from './shared/service/vote.service';
 import { FiltreService } from './shared/service/filtre.service';
+import { CommentaireService } from './shared/service/commentaire.service';
+
 
 import { ClassiqueComponent } from './classique/classique.component';
 import { TableauComponent } from './tableau/tableau.component';
@@ -24,6 +27,8 @@ import { FiltreByPseudoPipe } from './shared/pipe/filtre-by-pseudo.pipe';
 import { VotreDernierAvisComponent } from './votre-dernier-avis/votre-dernier-avis.component';
 import { SiteStatusComponent } from './site-status/site-status.component';
 import { VoteHistoriqueComponent } from './vote-historique/vote-historique.component';
+import { CommentaireComponent } from './commentaire/commentaire.component';
+
 
 
 const appRoutes: Routes = [
@@ -47,15 +52,23 @@ const appRoutes: Routes = [
     FiltreByPseudoPipe,
     VotreDernierAvisComponent,
     SiteStatusComponent,
-    VoteHistoriqueComponent
+    VoteHistoriqueComponent,
+    CommentaireComponent
   ],
   imports: [
 	BrowserModule,
 	HttpClientModule,
 	NgbModule.forRoot(),
-	RouterModule.forRoot(appRoutes)
+	RouterModule.forRoot(appRoutes),
+	FormsModule
   ],
-  providers: [CollegueService, AvisService, VoteService, FiltreService],
+  providers: [
+	CollegueService, 
+	AvisService, 
+	VoteService, 
+	FiltreService,
+	CommentaireService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

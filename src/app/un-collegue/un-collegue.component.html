@@ -8,5 +8,6 @@
 		<p class="card-text"><span class="display-3" [innerHTML]="collegue.score | score"> </span></p>
 	   
 		<app-opinion (opinion)="setOpinion($event)"></app-opinion>
+		<app-commentaire [collegue]="collegue"></app-commentaire>
 	</div>
 </div>

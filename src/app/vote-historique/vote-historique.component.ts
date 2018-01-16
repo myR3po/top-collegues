@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import {Observable} from 'rxjs/Rx'
+
 import { VoteService } from './../shared/service/vote.service';
 import { Vote } from '../shared/domain/vote'
 
@@ -10,14 +12,12 @@ import { Vote } from '../shared/domain/vote'
 })
 export class VoteHistoriqueComponent implements OnInit {
 
-	private votes:Vote[] = []
+	private votes:Observable<Vote[]>
 	
 	constructor(private voteService:VoteService){}
 
 	ngOnInit() {
-		this.voteService.listerVotes().subscribe(data => {
-			this.votes = data
-		})
+		this.votes = this.voteService.listerVotes()
 	}
 
 }

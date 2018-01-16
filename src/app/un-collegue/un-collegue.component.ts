@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core'
 
-import { Collegue } from './../shared/domain/collegue';
+import { Collegue } from './../shared/domain/collegue'
 import { Avis } from './../shared/domain/avis'
 
-import { VoteService } from './../shared/service/vote.service';
+import { VoteService } from './../shared/service/vote.service'
 
 @Component({
   selector: 'app-un-collegue',
