@@ -5,7 +5,7 @@ import {HttpClientModule} from '@angular/common/http';
 
 import { RouterModule, Routes } from '@angular/router';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { UnCollegueComponent } from './un-collegue/un-collegue.component';
@@ -60,7 +60,8 @@ const appRoutes: Routes = [
 	HttpClientModule,
 	NgbModule.forRoot(),
 	RouterModule.forRoot(appRoutes),
-	FormsModule
+	FormsModule,
+	ReactiveFormsModule
   ],
   providers: [
 	CollegueService, 

@@ -36,8 +36,11 @@ export class CommentaireComponent implements OnInit {
 	
 	submit(){
 		this.opinion.collegue = this.collegue
-		console.log(this.opinion)
-		this.commentaireService.sauvegarder(this.opinion)
+		let commentaire = {
+				commentaire:this.opinion.commentaire,
+				pseudo : this.collegue.pseudo
+		}
+		this.commentaireService.sauvegarder(commentaire)
 		this.modalRef.close()
 	}
 	

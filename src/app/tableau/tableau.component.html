@@ -16,7 +16,10 @@
 		</td>
 		<td>{{collegue.pseudo | uppercase}}</td>
 		<td [innerHTML]="collegue.score | score"></td>
-		<td><app-opinion (opinion)="setOpinion($event, collegue)"></app-opinion></td>
+		<td>
+			<app-opinion (opinion)="setOpinion($event, collegue)"></app-opinion>
+			<app-commentaire [collegue]="collegue"></app-commentaire>
+		</td>
 	  </tr>
 	</tbody>
 </table>

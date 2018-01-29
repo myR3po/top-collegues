@@ -17,13 +17,9 @@ export class CommentaireService {
 	}
 	
 	sauvegarder(newOpinion:Opinion) : void {
-		console.log(newOpinion.commentaire)
-			let com = {
-				commentaire:newOpinion.commentaire,
-				pseudo : newOpinion.collegue.pseudo
-			}
+
 			this.http.post<Collegue>(env.backendUrlComments,
-					com, 
+					newOpinion, 
 					{headers: new HttpHeaders().set('Content-Type', 'application/json')})
 					.subscribe()
 	}

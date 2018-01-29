@@ -14,6 +14,74 @@
           </div>
 		  <button class="btn btn-primary btn-large" [disabled]=canDisableButton (click)="add(pseudo, imageUrl)">Ajouter un nouveau collègue</button>
         </form>
+		
+		
+<br/>
+<br/>		
+		
+		
+		
+		<ng-template #content let-c="close" let-d="dismiss">
+		  <div class="modal-header">
+			<h4 class="modal-title">Votre avis compte</h4>
+			<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+			  <span aria-hidden="true">&times;</span>
+			</button>
+		  </div>
+		  <form class="form-horizontal" (ngSubmit)="submit()" [formGroup]="monForm" novalidate>
+			  <div class="modal-body">
+				  <div class="form-group">
+					<label for="comment">Comment trouvez-vous l'application Top Collegues ?</label>
+					
+					<div *ngFor="let unavis of listeAvis">
+					  <label>
+						<input type="radio" formControlName="avis" name="avis" [value]="unavis">
+						{{unavis}}
+					  </label>
+					</div>
+				  </div>
+				
+				  <div class="form-group">
+					<label for="suggestion">Avez-vous des suggestions?</label>
+					<textarea class="form-control" rows="5" name="suggestion" id="suggestion" placeholder="votre suggestion" formControlName="suggestion"></textarea>			  
+				  
+				  </div>
+				  
+				  	<div *ngIf="monForm.get('suggestion').errors && (monForm.get('suggestion').dirty || monForm.get('suggestion').touched)" class="alert alert-danger">
+
+					  <div *ngIf="monForm.get('suggestion').errors.required">
+						a commentary is required
+					  </div>
+					  <div *ngIf="monForm.get('suggestion').errors.minlength">
+						A commentary must be at least 20 characters long.
+					  </div>
+					  <div *ngIf="monForm.get('suggestion').errors.maxlength">
+						A commentary can not exceed 255 characters long.
+					  </div>
+					</div>
+
+			  </div>
+			  <div class="modal-footer">
+				<button type="submit" class="btn btn-outline-primary btn-lg" [disabled]="monForm.invalid">Enregistrer</button>
+			  </div>
+		  </form>
+		  {{ monForm.valid }}
+		  {{ monForm.get('suggestion').value }}
+		  {{ monForm.get('avis').value }}
+		</ng-template>
+
+		<button class="btn btn-outline-primary" [disabled]=canDisableButton (click)="open(content)">Donner votre avis sur l'application Top Collegues</button>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
       </div>
     </div>
 	

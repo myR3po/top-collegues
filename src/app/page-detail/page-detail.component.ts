@@ -29,6 +29,7 @@ export class PageDetailComponent implements OnInit {
 			this.collegue = data.filter(c => c.pseudo == this.pseudo)[0]
 			
 			this.commentaireService.listerOpinionPourCollegue(this.pseudo).subscribe(opinions => {
+console.log(opinions)
 				this.opinions = opinions.map(s => {
 					s.commentaire = s.commentaire.split('\n').join('<br>')
 					return s;
